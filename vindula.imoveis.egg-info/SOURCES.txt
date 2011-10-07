@@ -1,0 +1,15 @@
+README.txt
+setup.cfg
+setup.py
+vindula/__init__.py
+vindula.imoveis.egg-info/PKG-INFO
+vindula.imoveis.egg-info/SOURCES.txt
+vindula.imoveis.egg-info/dependency_links.txt
+vindula.imoveis.egg-info/entry_points.txt
+vindula.imoveis.egg-info/namespace_packages.txt
+vindula.imoveis.egg-info/not-zip-safe
+vindula.imoveis.egg-info/paster_plugins.txt
+vindula.imoveis.egg-info/requires.txt
+vindula.imoveis.egg-info/top_level.txt
+vindula/imoveis/__init__.py
+vindula/imoveis/tests.py

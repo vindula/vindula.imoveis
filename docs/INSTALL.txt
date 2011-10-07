@@ -1,0 +1,17 @@
+vindula.imoveis Installation
+----------------------------
+
+To install vindula.imoveis using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can do this:
+
+* Add ``vindula.imoveis`` to the list of eggs to install, e.g.:
+
+    [buildout]
+    ...
+    eggs =
+        ...
+        vindula.imoveis
+       
+* Re-run buildout, e.g. with:
+
+    $ ./bin/buildout
