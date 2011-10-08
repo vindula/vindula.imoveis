@@ -1,0 +1,9 @@
+<html>
+<body metal:use-macro="here/main_template/macros/master">
+
+<div metal:fill-slot="main" tal:define="imoveis_view view/getImoveis">
+	<h1>Imóveis</h1>
+
+</div>
+</body>
+</html>

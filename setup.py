@@ -5,7 +5,7 @@ version = '1.0'
 
 setup(name='vindula.imoveis',
       version=version,
-      description="Modulo de gerenciamento de imoveis.",
+      description="Vindula: Imoveis",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
@@ -28,6 +28,8 @@ setup(name='vindula.imoveis',
           'setuptools',
           'plone.app.dexterity',
           # -*- Extra requirements: -*-
+          'vindula.mongodbconnector',
+          'suds'
       ],
       entry_points="""
       # -*- Entry points: -*-

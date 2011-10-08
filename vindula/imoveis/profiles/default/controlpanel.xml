@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object
+    name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="vindula.imoveis">
+
+    <configlet
+        title="Vindula: Imoveis settings"
+        action_id="vindula.imoveis.content.controlpanel"
+        appId="vindula.imoveis"
+        category="Products"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@imoveis-controlpanel"
+        icon_expr="string:${portal_url}/++resource++vindula.imoveis/icon-controlpanel.png"
+        visible="True"
+        i18n:attributes="title">
+            <permission>Manage portal</permission>
+    </configlet>
+
+</object>

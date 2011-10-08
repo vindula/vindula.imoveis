@@ -13,3 +13,11 @@ vindula.imoveis.egg-info/requires.txt
 vindula.imoveis.egg-info/top_level.txt
 vindula/imoveis/__init__.py
 vindula/imoveis/tests.py
+vindula/imoveis/browser/__init__.py
+vindula/imoveis/browser/imoveis.py
+vindula/imoveis/browser/imoveis_base.py
+vindula/imoveis/browser/interfaces.py
+vindula/imoveis/browser/views.py
+vindula/imoveis/content/__init__.py
+vindula/imoveis/content/imovel.py
+vindula/imoveis/content/interfaces.py
