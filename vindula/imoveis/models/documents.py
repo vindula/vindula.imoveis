@@ -84,6 +84,75 @@ class Imovel(MongoPersistent):
     primary_key = 'Id'
     attributes = ['_type',
                   'Id',
+                  'Id_antigo',
+                  'Logradouro',
+                  'Complemento',
+                  'Cep',
+                  'Descricao',
+                  'DescricaoCompleta',
+                  'ResumoEndereco',
+                  'Quarto',
+                  'Suite',
+                  'AluguelGarantidows',
+                  'descontoIRRFws',
+                  'Banheiro',
+                  'Lavabo',
+                  'Elevador',
+                  'Garagem',
+                  'Dce',
+                  'Armarios',
+                  'Vazadows',
+                  'Posicao',
+                  'dataInclusao',
+                  'dataAlteracao',
+                  'Responsavel',
+                  'Creci',
+                  'Telefone1',
+                  'Telefone2',
+                  'Plantaws',
+                  'Agiows',
+                  'exibirPortalws',
+                  'Exibirsitews',
+                  'Exibirobraws',
+                  'Destaquews',
+                  'Ativows',
+                  'areaTerrenostr',
+                  'Areaverdestr',
+                  'AreaCasaStr',
+                  'areaConstruidoStr',
+                  'Areatotalstr',
+                  'Valorcondominiostr',
+                  'Valorquitadostr',
+                  'Valoragiostr',
+                  'Valorstr',
+                  'Valoradicionalstr',
+                  'Valorquitadostr',
+                  'Valoragiostr',
+                  'Valorstr',
+                  'Valoradicionalstr',
+                  'Numeroapartemanto',
+                  'Empreendimento',
+                  'NumeroPasta',
+                  'numeroContrato',
+                  'dataOpcaoVenda',
+                  'dataVencimento',
+                  'Vista',
+                  'Fachada',
+                  'Andar',
+                  'Andares',
+                  'NumeroIPTU',
+                  'numeroIPTUBox',
+                  'NumeroChave',
+                  'SituacaoChave',
+                  'Caracteristica',
+                  'PosicaoSol',
+                  'ValorAluguelStr',
+                  'Prioridade',
+                  'videoUrl',
+                  'videoPath',
+                  'videoPath2',
+                  'videoPath3',
+                  'Referencia',
                   'data_criacao_objeto',
                   'DataOpcaoVenda',
                   'ValorAluguelStr',
@@ -94,6 +163,75 @@ class Imovel(MongoPersistent):
                   'Situacao_Id',
                   ]
     Id = ''
+    Id_antigo = None
+    Logradouro = None
+    Complemento = None
+    Cep = None
+    Descricao = None
+    DescricaoCompleta = None
+    ResumoEndereco = None
+    Quarto = None
+    Suite = None
+    AluguelGarantidows = None
+    descontoIRRFws = None
+    Banheiro = None
+    Lavabo = None
+    Elevador = None
+    Garagem = None
+    Dce = None
+    Armarios = None
+    Vazadows = None
+    Posicao = None
+    dataInclusao = None
+    dataAlteracao = None
+    Responsavel = None
+    Creci = None
+    Telefone1 = None
+    Telefone2 = None
+    Plantaws = None
+    Agiows = None
+    exibirPortalws = None
+    Exibirsitews = None
+    Exibirobraws = None
+    Destaquews = None
+    Ativows = None
+    areaTerrenostr = None
+    Areaverdestr = None
+    AreaCasaStr  = None
+    areaConstruidoStr = None
+    Areatotalstr = None
+    Valorcondominiostr = None
+    Valorquitadostr = None
+    Valoragiostr = None
+    Valorstr = None
+    Valoradicionalstr = None
+    Valorquitadostr = None
+    Valoragiostr = None
+    Valorstr = None
+    Valoradicionalstr = None
+    Numeroapartemanto = None
+    Empreendimento = None
+    NumeroPasta = None
+    numeroContrato = None
+    dataOpcaoVenda = None
+    dataVencimento = None
+    Vista = None
+    Fachada = None
+    Andar = None
+    Andares = None
+    NumeroIPTU = None
+    numeroIPTUBox = None
+    NumeroChave = None
+    SituacaoChave = None
+    Caracteristica = None
+    PosicaoSol  = None
+    ValorAluguelStr  = None
+    Prioridade = None
+    videoUrl = None
+    videoPath = None
+    videoPath2 = None
+    videoPath3 = None
+    Referencia = None
     data_criacao_objeto = None
     DataOpcaoVenda = None
     DataVencimento = None
