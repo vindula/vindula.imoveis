@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="vindula.imoveis">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+    	<tal:stats define="stats view/getStatistics;">
+	    	<h1>Ferramenta de importa&ccedil;&atilde;o de im&oacute;veis</h1>
+			
+			<br/>
+			
+			<p>
+				<strong>Im&oacute;veis Venda:</strong>
+				<span tal:content="stats/venda"></span>
+			</p>
+			<p>
+				<strong>Im&oacute;veis Aluguel:</strong>
+				<span tal:content="stats/aluguel"></span>
+			</p>
+			<p>
+				<strong>Im&oacute;veis Total:</strong>
+				<span tal:content="stats/total"></span>
+			</p>
+			
+			<tal:import condition="python: 'import' in context.REQUEST.form.keys()">
+				<tal:import_method define="import_stats view/import_imoveis"></tal:import_method>
+			</tal:import>
+			
+			<form action="" method="Post">
+				<input type='submit' name='import' value='Importar Im&oacute;veis'>
+			</form>
+			
+		</tal:stats>
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>

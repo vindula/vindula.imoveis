@@ -26,22 +26,43 @@ class WSIntegrationView(grok.View):
                 'imoveis_aluguel':registry.records.get(record_prefix + '.imoveis_aluguel').value,
                 }
         return vars
-    
-    def render(self):
+
+    def getMongoConnection(self):
         vars = self.getSettings()
         mongodb_tool = getUtility(IMongoDBConnector)
         db = mongodb_tool.getDBConnection(db_name=vars['db_name'],
                                           transformation_class=Transform)
-        imoveis_folder = ImovelCollection(db)
+        return db
+        
+    def getStatistics(self):
+        imoveis_folder = ImovelCollection(self.getMongoConnection())
+        vars = {'total':imoveis_folder.collection.find().count(),
+                'aluguel':imoveis_folder.collection.find().count(),
+                'venda':imoveis_folder.collection.find().count(),}
+        return vars
+    
+    def import_imoveis(self):
+        vars = self.getSettings()        
+        imoveis_folder = ImovelCollection(self.getMongoConnection())
         
         client = Client(vars['ws_address'])
         client.service.logar(vars['ws_user'],
                              vars['ws_password'])
-        lista_alugueis = client.service.listarAluguel(True)
+        
+        
         if vars['ws_integration'] == True:
             print 'Importing Data form Ws: ', vars['ws_address']
+            lista_alugueis = client.service.listarAluguel(True)
             for imovel in lista_alugueis:
+                imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                
+        
+        if vars['ws_integration'] == True:
+            print 'Importing Data form Ws: ', vars['ws_address']
+            lista_vendas = client.service.listarVenda(True)
+            for imovel in lista_vendas:
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
         
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
-        return vars
+        return ''
+        

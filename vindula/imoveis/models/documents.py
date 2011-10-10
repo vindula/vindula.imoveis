@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from pymongo.son_manipulator import SONManipulator
-from vindula.imoveis.models.collections import *
+from collections import *
 
 class MongoPersistent(object):
     _type = ''
@@ -105,6 +105,7 @@ class Imovel(MongoPersistent):
     Situacao_Id = None
     
     def CustomSalvaDados(self,objeto_ws):
+        from collections import *
         self.Cidade_Id = objeto_ws.Cidade.Id
         #Pesquisando se existe a cidade, senao existir cria.
         CidadeCollection(self.collection.database).get(objeto_ws.Cidade.Id,params_obj=objeto_ws.Cidade)
