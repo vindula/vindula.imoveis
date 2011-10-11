@@ -161,6 +161,7 @@ class Imovel(MongoPersistent):
                   'Regiao_Id',
                   'Bairro_Id',
                   'Situacao_Id',
+                  'TipoImovel_Id',
                   ]
     Id = ''
     Id_antigo = None
@@ -241,6 +242,7 @@ class Imovel(MongoPersistent):
     Regiao_Id = None
     Bairro_Id = None
     Situacao_Id = None
+    TipoImovel_Id = None
     
     def CustomSalvaDados(self,objeto_ws):
         from collections import *
@@ -252,9 +254,9 @@ class Imovel(MongoPersistent):
         #Pesquisando se existe a UF, senao existir cria.
         UfCollection(self.collection.database).get(objeto_ws.Uf.Uf,params_obj=objeto_ws.Uf)
         
-        #self.Regiao_Id = objeto_ws.Regiao.Id
+        self.Regiao_Id = objeto_ws.Regiao.Id
         #Pesquisando se existe a Regiao, senao existir cria.
-        #RegiaoCollection(self.collection.database).get(objeto_ws.Regiao.Id,params_obj=objeto_ws.Regiao)
+        RegiaoCollection(self.collection.database).get(objeto_ws.Regiao.Id,params_obj=objeto_ws.Regiao)
         
         self.Bairro_Id = objeto_ws.Bairro.Id
         #Pesquisando se existe o Bairro, senao existir cria.
@@ -263,6 +265,11 @@ class Imovel(MongoPersistent):
         self.Situacao_Id = objeto_ws.Situacao.Id
         #Pesquisando se existe a Situa��o, senao existir cria.
         SituacaoCollection(self.collection.database).get(objeto_ws.Situacao.Id,params_obj=objeto_ws.Situacao)
+        
+        self.TipoImovel_Id = objeto_ws.Tipo.Id
+        #Pesquisando se existe a Situacao, senao existir cria.
+        TipoImovelCollection(self.collection.database).get(objeto_ws.Tipo.Id,params_obj=objeto_ws.Tipo)
+        
         self.save()
         
     def getCidade(self):
@@ -282,6 +289,9 @@ class Imovel(MongoPersistent):
     
     def getSituacao(self):
         situacao = SituacaoCollection(self.collection.database).get(self.Situacao_Id)
+    
+    def getTipoImovel(self):
+        tipo_imovel = TipoImovelCollection(self.collection.database).get(self.TipoImovel_Id)
 
 class Cidade(MongoPersistent):          
     _type = 'Cidade'
@@ -367,14 +377,27 @@ class Regiao(MongoPersistent):
                   'Id',
                   ]
     Id = None
-    
+
+class TipoImovel(MongoPersistent):
+    _type = 'Tipo'
+    primary_key = 'Id'
+    attributes = ['_type',
+                  'Id',
+                  'Descricao',
+                  ]
+    Id = ''
+    Descricao = None
+
+   
 class Transform(SONManipulator):
     types = ['Imovel',
              'Cidade',
              'Uf',
              'Regiao',
              'Bairro',
-             'Situacao',]
+             'Situacao',
+             'TipoImovel',
+             ]
 
     def transform_incoming(self, son, collection):
         for key in son.keys():

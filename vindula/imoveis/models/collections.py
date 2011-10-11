@@ -64,6 +64,24 @@ class ImovelCollection(BaseCollection):
     def createCustomtIndexes(self):
         pass
 
+    def getImovelbyCidadeId(self,cidade_id):
+        return self.collection.find({'Cidade_Id':cidade_id})
+    
+    def getImovelbyUfId(self,uf_id):
+        return self.collection.find({'Uf_Id':uf_id})
+    
+    def getImovelbyBairro(self,cidade_id,bairro_id):
+        return self.collection.find({'Cidade_Id':cidade_id,'Bairro_Id':bairro_id})
+    
+    def getImovelbySituacao(self,situacao_id):
+        return self.collection.find({'Situacao_Id':situacao_id})
+    
+    def getCountSituacao(self,situacao_id):
+        return self.collection.find({'Situacao_Id':situacao_id}).count()
+    
+    def getImovelbyId(self,id):
+        return self.collection.find({'Id':id}) 
+        
 class CidadeCollection(BaseCollection):
     """
     Manage the Cidade Collection
@@ -71,6 +89,9 @@ class CidadeCollection(BaseCollection):
     collection = 'Cidade'
     key =  'Id'
 
+    def getCidades(self):
+        return self.collection.find({})
+    
 class UfCollection(BaseCollection):
     """
     Manage the Uf Collection
@@ -91,10 +112,22 @@ class BairroCollection(BaseCollection):
     """
     collection = 'Bairro'
     key = 'Id'
-
+    
 class SituacaoCollection(BaseCollection):
     """
     Manage the Situcao Collection
     """
     collection = 'Situacao'
     key = 'Id'
+    
+    def getSituacoes(self):
+        return self.collection.find({})
+
+class TipoImovelCollection(BaseCollection):
+    """
+        Manage the TipoImovel Collection
+    """
+    collection = 'TipoImovel'
+    key = 'Id'
+        
+        
