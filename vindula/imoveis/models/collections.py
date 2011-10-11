@@ -3,6 +3,7 @@ from datetime import datetime
 from pymongo.son_manipulator import SONManipulator
 from pymongo import ASCENDING, DESCENDING
 from vindula.imoveis.models.documents import *
+from interfaces import ICollection
 
 class BaseCollection(object):
     """
@@ -80,7 +81,10 @@ class ImovelCollection(BaseCollection):
         return self.collection.find({'Situacao_Id':situacao_id}).count()
     
     def getImovelbyId(self,id):
-        return self.collection.find({'Id':id}) 
+        return self.collection.find({'Id':id})
+    
+    def getImovelbyTipoImovel(self,tipoimovel_id):
+        return self.collection.find({'TipoImovel_Id': tipoimovel_id}) 
         
 class CidadeCollection(BaseCollection):
     """
@@ -91,6 +95,22 @@ class CidadeCollection(BaseCollection):
 
     def getCidades(self):
         return self.collection.find({})
+    
+    def getCidadeByTipo(self,tipo):
+        if tipo == 1:
+            campo = 'Venda'
+        else:
+            campo = 'Aluguel'
+        
+        imovel_folder = ImovelCollection(self.collection.database)
+        busca = imovel_folder.find({campo:True})
+        cidades = []
+        for imovel in busca:
+            cidades.append(imovel.getCidade())
+            
+        return cidades
+            
+    
     
 class UfCollection(BaseCollection):
     """

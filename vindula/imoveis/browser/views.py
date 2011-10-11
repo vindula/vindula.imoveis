@@ -55,6 +55,8 @@ class WSIntegrationView(grok.View):
             lista_alugueis = client.service.listarAluguel(True)
             for imovel in lista_alugueis:
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                imovel_obj.Aluguel = True
+                imovel_obj.save()
                 
         
         if vars['ws_integration'] == True:
@@ -62,7 +64,8 @@ class WSIntegrationView(grok.View):
             lista_vendas = client.service.listarVenda(True)
             for imovel in lista_vendas:
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                imovel_obj.Venda = True
+                imovel_obj.save()
         
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
-        return ''
-        
+        return ''        

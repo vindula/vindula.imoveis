@@ -162,6 +162,8 @@ class Imovel(MongoPersistent):
                   'Bairro_Id',
                   'Situacao_Id',
                   'TipoImovel_Id',
+                  'Aluguel',
+                  'Venda',
                   ]
     Id = ''
     Id_antigo = None
@@ -243,6 +245,8 @@ class Imovel(MongoPersistent):
     Bairro_Id = None
     Situacao_Id = None
     TipoImovel_Id = None
+    Aluguel = False
+    Venda = False
     
     def CustomSalvaDados(self,objeto_ws):
         from collections import *

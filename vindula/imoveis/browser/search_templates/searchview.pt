@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="vindula.imoveis">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="search-box">
+    	<tal:stats define="values view/get_values_search;">
+	    	<form id="search-imovel" action="" method="post" 
+				   tal:attributes="action string:${context/portal_url}/@@result-imoveis">
+				
+					<div class="combo">
+						<select name="negocio" id="negocio" value="">
+							<option value="1">Venda</option>
+							<option value="2">Aluguel</option>									
+						</select>
+					</div>
+					
+					<input type="hidden" id="portal_url" tal:attributes="value context/portal_url">
+					
+					<div class="combo">
+						<select name="cidade" id="cidade">
+						 		<option value="cidade">Cidade</option>							
+								<span>
+									<option>CIDADE</option>
+								</span>	
+						</select>
+					</div>
+					
+					<div class="combo">
+						<select name="bairro" id="bairro">
+							<option value="0" selected="selected">Bairro</option>
+							<option value="0">Todos</option>
+						</select>
+					</div>
+					
+					<div class="combo">
+						<select name="tipo" id="tipo">
+							<option value="0" selected="selected">Tipo</option>
+							<option value="0">Todos</option>
+							<option value="1">Andar/Pilotis</option>
+							<option value="apartamento">Apartamento</option>
+							<option value="aparthotel">Apart-hotel</option>
+							<option value="133">Barrac&atilde;o</option>
+							<option value="casa">Casa</option>
+							<option value="127">Casa comercial</option>
+							<option value="138">Clube</option>
+							<option value="9">Cobertura</option>
+							<option value="126">Dúplex</option>
+							<option value="129">Estacionamento</option>
+							<option value="10">Galp&atilde;o</option>
+							<option value="11">Garagem</option>
+							<option value="135">Haras</option>
+							<option value="13">Ilha</option>
+							<option value="125">kitnete</option>
+							<option value="124">Loft</option>
+							<option value="loja">Loja</option>
+							<option value="lote">Lote/Area/Terreno</option>
+							<option value="130">Pousada</option>
+							<option value="131">Ponto Comercial</option>
+							<option value="16">Pr&eacute;dio</option>
+							<option value="17">Sala</option>
+							<option value="sitio_fazenda">S&iacute;tio/Fazenda/Hotel-Fazenda</option>
+							<option value="123">Sobrado</option>
+						</select>
+					</div>
+					
+					<div class="opcionais">
+						<input type="submit" value="busca" class="button-opcionais"/>
+					</div>
+							
+					</form>			
+		</tal:stats>
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
