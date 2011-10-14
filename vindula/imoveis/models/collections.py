@@ -80,8 +80,8 @@ class ImovelCollection(BaseCollection):
     def getCountSituacao(self,situacao_id):
         return self.collection.find({'Situacao_Id':situacao_id}).count()
     
-    def getImovelbyId(self,id):
-        return self.collection.find({'Id':id})
+    def getImovelById(self,imovel_id):
+        return self.collection.find({'Id':imovel_id})
     
     def getImovelbyTipoImovel(self,tipoimovel_id):
         return self.collection.find({'TipoImovel_Id': tipoimovel_id}) 
