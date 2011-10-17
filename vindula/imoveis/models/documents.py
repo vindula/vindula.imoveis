@@ -274,6 +274,9 @@ class Imovel(MongoPersistent):
         #Pesquisando se existe a Situacao, senao existir cria.
         TipoImovelCollection(self.collection.database).get(objeto_ws.Tipo.Id,params_obj=objeto_ws.Tipo)
         
+        self.FotoImovel_Id = objeto_ws.Foto.Id
+        #Pesquisando se existe a Foto, senao existir cria.
+        FotoImovelCollection(self.collection.database).get(objeto_ws.Foto.Id,params_obj=objeto_ws.Foto)
         self.save()
         
     def getCidade(self):
@@ -296,6 +299,9 @@ class Imovel(MongoPersistent):
     
     def getTipoImovel(self):
         tipo_imovel = TipoImovelCollection(self.collection.database).get(self.TipoImovel_Id)
+    
+    def getFotoImovel(self):
+        foto_imovel = FotoImovelCollection(self.collection.database).get(self.FotoImovel_Id)
 
 class Cidade(MongoPersistent):          
     _type = 'Cidade'
@@ -379,8 +385,22 @@ class Regiao(MongoPersistent):
     primary_key = 'Id'
     attributes = ['_type',
                   'Id',
+                  'Regiao_Id',
+                  'IdCidade',
+                  'Cidade_Id',
+                  'Nome',
+                  'GMapZoom',
+                  'Latitude',
+                  'Longitude',
                   ]
     Id = None
+    Regiao_Id = None
+    IdCidade = None
+    Cidade_Id = None
+    Nome = None
+    GMapZoom = None
+    Latitude = None
+    Longitude = None
 
 class TipoImovel(MongoPersistent):
     _type = 'Tipo'
@@ -392,7 +412,32 @@ class TipoImovel(MongoPersistent):
     Id = ''
     Descricao = None
 
-   
+class FotoImovel(MongoPersistent):
+    _type = 'Tipo'
+    primary_key = 'Id'
+    attributes = ['_type',
+                  'Id',
+                  'FotoImovel_Id',
+                  'Fisico',
+                  'Path',
+                  'NomeArquivo',
+                  'DataInclusao',
+                  'DataAlteracao',
+                  'AtivoWs',
+                  'AtualizadoWs',
+                  'Descricao',
+                  ]
+    Id = ''
+    FotoImovel_Id = None
+    Fisico = None
+    Path = None
+    NomeArquivo = None
+    DataInclusao = None
+    DataAlteracao = None
+    AtivoWs = None
+    AtualizadoWs = None
+    Descricao = None
+    
 class Transform(SONManipulator):
     types = ['Imovel',
              'Cidade',
@@ -401,6 +446,7 @@ class Transform(SONManipulator):
              'Bairro',
              'Situacao',
              'TipoImovel',
+             'FotoImovel',
              ]
 
     def transform_incoming(self, son, collection):

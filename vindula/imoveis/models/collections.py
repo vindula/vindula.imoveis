@@ -74,8 +74,11 @@ class ImovelCollection(BaseCollection):
     def getImovelbyBairro(self,cidade_id,bairro_id):
         return self.collection.find({'Cidade_Id':cidade_id,'Bairro_Id':bairro_id})
     
-    def getImovelbySituacao(self,situacao_id):
-        return self.collection.find({'Situacao_Id':situacao_id})
+    def getImovelAluguel(self):
+        return self.collection.find({'Aluguel':True})
+    
+    def getImovelVenda(self):
+        return self.collection.find({'Venda':True})
     
     def getCountSituacao(self,situacao_id):
         return self.collection.find({'Situacao_Id':situacao_id}).count()
@@ -125,6 +128,10 @@ class RegiaoCollection(BaseCollection):
     """
     collection = 'Regiao'
     key = 'Id'
+    
+    def getRegiao(self):
+        regiao = RegiaoCollection(self.collection.database).get(self.Regiao_Id)
+        return regiao
 
 class BairroCollection(BaseCollection):
     """
@@ -142,6 +149,14 @@ class SituacaoCollection(BaseCollection):
     
     def getSituacoes(self):
         return self.collection.find({})
+
+class FotoImovel(BaseCollection):
+    """
+    Manage the Bairro Collection
+    """
+    collection = 'Foto'
+    key = 'Id'
+    
 
 class TipoImovelCollection(BaseCollection):
     """
