@@ -88,7 +88,11 @@ class ImovelCollection(BaseCollection):
     
     def getImovelbyTipoImovel(self,tipoimovel_id):
         return self.collection.find({'TipoImovel_Id': tipoimovel_id}) 
-        
+    
+    def getFotosbyId(self,id_imovel):
+        from collections import FotoImovelCollection
+        fotos_folder = FotoImovelCollection(self.collection.database)
+        return [i for i in fotos_folder.collection.find({'ImovelId':id_imovel})]    
 class CidadeCollection(BaseCollection):
     """
     Manage the Cidade Collection
