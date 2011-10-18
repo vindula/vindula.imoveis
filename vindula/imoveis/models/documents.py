@@ -344,25 +344,25 @@ class Uf(MongoPersistent):
     Longitude = None
 
 class Bairro(MongoPersistent):
-    _type = 'Uf'
+    _type = 'Bairro'
     primary_key = 'Id'
     attributes = ['_type',
                   'Id',
-                  'Id_Regiao'
+                  'IdRegiao'
                   'Nome',
                   'GMapZoom',
                   'Latitude',
                   'Longitude',
-                  'Id_RegiaoNome',
+                  'IdRegiaoNome',
                   ]
     Id = ''
     Id = None
-    Id_Regiao = None
+    IdRegiao = None
     Nome = None
     GMapZoom = None
     Latitude = None
     Longitude = None
-    Id_RegiaoNome = None
+    IdRegiaoNome = None
 
 class Situacao(MongoPersistent):
     _type = 'Situacao'
