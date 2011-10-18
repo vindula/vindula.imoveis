@@ -44,10 +44,10 @@ class WSIntegrationView(grok.View):
     def import_imoveis(self):
         vars = self.getSettings()        
         imoveis_folder = ImovelCollection(self.getMongoConnection())
+        fotos_folder = FotoImovelCollection(self.getMongoConnection())
         
         client = Client(vars['ws_address'])
-        client.service.logar(vars['ws_user'],
-                             vars['ws_password'])
+        client.service.logar(vars['ws_user'],vars['ws_password'])
         
         
         if vars['ws_integration'] == True:
@@ -66,6 +66,13 @@ class WSIntegrationView(grok.View):
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
                 imovel_obj.Venda = True
                 imovel_obj.save()
+                
+        print 'Importing Photos'
+        for imovel in imoveis_folder.collection.find():
+            fotos = client.service.listarFoto(imovel.Id)
+            for foto in fotos:
+                foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
+                foto_obj.ImovelId = imovel.Id
         
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
         return ''        

@@ -148,14 +148,13 @@ class SituacaoCollection(BaseCollection):
     def getSituacoes(self):
         return self.collection.find({})
 
-class FotoImovel(BaseCollection):
+class FotoImovelCollection(BaseCollection):
     """
     Manage the Bairro Collection
     """
-    collection = 'Foto'
+    collection = 'FotoImovel'
     key = 'Id'
     
-
 class TipoImovelCollection(BaseCollection):
     """
         Manage the TipoImovel Collection

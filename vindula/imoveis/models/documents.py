@@ -267,16 +267,16 @@ class Imovel(MongoPersistent):
         BairroCollection(self.collection.database).get(objeto_ws.Bairro.Id,params_obj=objeto_ws.Bairro)
         
         self.Situacao_Id = objeto_ws.Situacao.Id
-        #Pesquisando se existe a Situa��o, senao existir cria.
+        #Pesquisando se existe a Situacao, senao existir cria.
         SituacaoCollection(self.collection.database).get(objeto_ws.Situacao.Id,params_obj=objeto_ws.Situacao)
         
         self.TipoImovel_Id = objeto_ws.Tipo.Id
         #Pesquisando se existe a Situacao, senao existir cria.
         TipoImovelCollection(self.collection.database).get(objeto_ws.Tipo.Id,params_obj=objeto_ws.Tipo)
         
-        self.FotoImovel_Id = objeto_ws.Foto.Id
+        #self.FotoImovel_Id = objeto_ws.Foto.Id
         #Pesquisando se existe a Foto, senao existir cria.
-        FotoImovelCollection(self.collection.database).get(objeto_ws.Foto.Id,params_obj=objeto_ws.Foto)
+        #FotoImovelCollection(self.collection.database).get(objeto_ws.Foto.Id,params_obj=objeto_ws.Foto)
         self.save()
         
     def getCidade(self):
@@ -301,9 +301,10 @@ class Imovel(MongoPersistent):
     def getTipoImovel(self):
         tipo_imovel = TipoImovelCollection(self.collection.database).get(self.TipoImovel_Id)
     
-    def getFotoImovel(self):
-        foto_imovel = FotoImovelCollection(self.collection.database).get(self.FotoImovel_Id)
-
+    def getFotos(self):
+        fotos_folder = FotoImovelCollection(self.collection.database)
+        return fotos_folder.collection.find({'ImovelId':self.Id})
+        
 class Cidade(MongoPersistent):          
     _type = 'Cidade'
     primary_key = 'Id'
@@ -414,7 +415,7 @@ class TipoImovel(MongoPersistent):
     Descricao = None
 
 class FotoImovel(MongoPersistent):
-    _type = 'Tipo'
+    _type = 'FotoImovel'
     primary_key = 'Id'
     attributes = ['_type',
                   'Id',
@@ -427,6 +428,7 @@ class FotoImovel(MongoPersistent):
                   'AtivoWs',
                   'AtualizadoWs',
                   'Descricao',
+                  'ImovelId'
                   ]
     Id = ''
     FotoImovel_Id = None
@@ -438,6 +440,12 @@ class FotoImovel(MongoPersistent):
     AtivoWs = None
     AtualizadoWs = None
     Descricao = None
+    ImovelId = None
+    
+    def getUrl(self):
+        url = 'http://www.wimoveis.com.br/img/foto/%s/%s'
+        url = url % (self.Path,self.NomeArquivo)
+        return url
     
 class Transform(SONManipulator):
     types = ['Imovel',
