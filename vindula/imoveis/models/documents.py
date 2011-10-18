@@ -288,6 +288,7 @@ class Imovel(MongoPersistent):
         return uf
     
     def getRegiao(self):
+        from collections import RegiaoCollection
         regiao = RegiaoCollection(self.collection.database).get(self.Regiao_Id)
         return regiao
     

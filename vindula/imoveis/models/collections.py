@@ -97,7 +97,7 @@ class CidadeCollection(BaseCollection):
     key =  'Id'
 
     def getCidades(self):
-        return self.collection.find({})
+        return self.collection.find()
     
     def getCidadeByTipo(self,tipo):
         if tipo == 1:
@@ -112,9 +112,7 @@ class CidadeCollection(BaseCollection):
             cidades.append(imovel.getCidade())
             
         return cidades
-            
-    
-    
+                    
 class UfCollection(BaseCollection):
     """
     Manage the Uf Collection
