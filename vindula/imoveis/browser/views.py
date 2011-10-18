@@ -67,12 +67,14 @@ class WSIntegrationView(grok.View):
                 imovel_obj.Venda = True
                 imovel_obj.save()
                 
-        print 'Importing Photos'
+        
         for imovel in imoveis_folder.collection.find():
+            print 'Importing Photos Imovel: ', imovel.Id
             fotos = client.service.listarFoto(imovel.Id)
             for foto in fotos:
                 foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
                 foto_obj.ImovelId = imovel.Id
+                foto_obj.save()
         
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
         return ''        

@@ -302,6 +302,7 @@ class Imovel(MongoPersistent):
         tipo_imovel = TipoImovelCollection(self.collection.database).get(self.TipoImovel_Id)
     
     def getFotos(self):
+        from collections import FotoImovelCollection
         fotos_folder = FotoImovelCollection(self.collection.database)
         return fotos_folder.collection.find({'ImovelId':self.Id})
         
@@ -405,7 +406,7 @@ class Regiao(MongoPersistent):
     Longitude = None
 
 class TipoImovel(MongoPersistent):
-    _type = 'Tipo'
+    _type = 'TipoImovel'
     primary_key = 'Id'
     attributes = ['_type',
                   'Id',
