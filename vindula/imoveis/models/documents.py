@@ -124,11 +124,10 @@ class Imovel(MongoPersistent):
                   'Valorcondominiostr',
                   'Valorquitadostr',
                   'Valoragiostr',
-                  'Valorstr',
+                  'ValorStr',
                   'Valoradicionalstr',
                   'Valorquitadostr',
                   'Valoragiostr',
-                  'Valorstr',
                   'Valoradicionalstr',
                   'Numeroapartemanto',
                   'Empreendimento',
@@ -206,11 +205,10 @@ class Imovel(MongoPersistent):
     Valorcondominiostr = None
     Valorquitadostr = None
     Valoragiostr = None
-    Valorstr = None
+    ValorStr = None
     Valoradicionalstr = None
     Valorquitadostr = None
     Valoragiostr = None
-    Valorstr = None
     Valoradicionalstr = None
     Numeroapartemanto = None
     Empreendimento = None
