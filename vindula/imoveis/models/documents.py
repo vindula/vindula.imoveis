@@ -348,7 +348,7 @@ class Bairro(MongoPersistent):
     primary_key = 'Id'
     attributes = ['_type',
                   'Id',
-                  'IdRegiao'
+                  'IdRegiao',
                   'Nome',
                   'GMapZoom',
                   'Latitude',
@@ -363,6 +363,9 @@ class Bairro(MongoPersistent):
     Latitude = None
     Longitude = None
     IdRegiaoNome = None
+    
+    def CustomSalvaDados(self,objeto_ws):
+        self.save()
 
 class Situacao(MongoPersistent):
     _type = 'Situacao'
