@@ -87,7 +87,26 @@ class ImovelCollection(BaseCollection):
         return self.collection.find({'Id':imovel_id})
     
     def getImovelbyTipoImovel(self,tipoimovel_id):
-        return self.collection.find({'TipoImovel_Id': tipoimovel_id}) 
+        return self.collection.find({'TipoImovel_Id': tipoimovel_id})
+    
+    def getImoveisSearch(self,situacao,cidade_id,bairro_id,tipoimovel_id):
+        #Situacao 1 == Venda e Situacao 2 == Aluguel
+#        dict_busca = {}
+#        if 'bairro' in self.key and int(self.get('bairro',0)) != 0: 
+#            dict_busca['Bairro_Id'] = int(self.get('bairro')) 
+#        return [i for i in self.collection.find(dict_busca)]
+        
+        if 'tipo' in self.key and int(self.get('tipo',0)) != 0: 
+            dict_busca['TipoImovel_Id'] = int(self.get('tipo')) 
+        return [i for i in self.collection.find(dict_busca)]
+        
+        if situacao == 1 and tipoimovel_id != 0 :
+            return [i for i in self.collection.find({'Venda':True,'Cidade_Id':cidade_id,'Bairro_Id':bairro_id,'TipoImovel_Id':tipoimovel_id})]
+        
+        elif situacao == 2 and tipoimovel_id != 0 :
+            return [i for i in self.collection.find({'Aluguel':True,'Cidade_Id':cidade_id,'Bairro_Id':bairro_id,'TipoImovel_Id':tipoimovel_id})]
+        else:
+            pass     
     
     def getFotosbyId(self,id_imovel):
         from collections import FotoImovelCollection
