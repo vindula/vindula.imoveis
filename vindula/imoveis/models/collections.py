@@ -91,27 +91,30 @@ class ImovelCollection(BaseCollection):
     
     def getImoveisSearch(self,situacao,cidade_id,bairro_id,tipoimovel_id):
         #Situacao 1 == Venda e Situacao 2 == Aluguel
-#        dict_busca = {}
-#        if 'bairro' in self.key and int(self.get('bairro',0)) != 0: 
-#            dict_busca['Bairro_Id'] = int(self.get('bairro')) 
-#        return [i for i in self.collection.find(dict_busca)]
+        dict_busca = {}
+        if situacao != 0:
+            if situacao == 1:
+                dict_busca['Venda'] = True
+            elif situacao == 2:
+                dict_busca['Aluguel'] = True
+                
+        if cidade_id != 0 :
+            dict_busca['Cidade_Id'] = cidade_id
+            
+        if bairro_id != 0:
+            dict_busca['Bairro_Id'] = bairro_id
+            
+        if tipoimovel_id != 0:
+            dict_busca['TipoImovel_Id'] = tipoimovel_id
+            
+        print dict_busca
+        return self.collection.find(dict_busca)
         
-        if 'tipo' in self.key and int(self.get('tipo',0)) != 0: 
-            dict_busca['TipoImovel_Id'] = int(self.get('tipo')) 
-        return [i for i in self.collection.find(dict_busca)]
-        
-        if situacao == 1 and tipoimovel_id != 0 :
-            return [i for i in self.collection.find({'Venda':True,'Cidade_Id':cidade_id,'Bairro_Id':bairro_id,'TipoImovel_Id':tipoimovel_id})]
-        
-        elif situacao == 2 and tipoimovel_id != 0 :
-            return [i for i in self.collection.find({'Aluguel':True,'Cidade_Id':cidade_id,'Bairro_Id':bairro_id,'TipoImovel_Id':tipoimovel_id})]
-        else:
-            pass     
-    
     def getFotosbyId(self,id_imovel):
         from collections import FotoImovelCollection
         fotos_folder = FotoImovelCollection(self.collection.database)
-        return [i for i in fotos_folder.collection.find({'ImovelId':id_imovel})]    
+        return [i for i in fotos_folder.collection.find({'ImovelId':id_imovel})] 
+       
 class CidadeCollection(BaseCollection):
     """
     Manage the Cidade Collection
