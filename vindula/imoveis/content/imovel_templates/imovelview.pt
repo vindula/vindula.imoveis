@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="vindula.imoveis">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+    	<tal:define define="imovel view/getImovel;">
+    	<div>
+			<div class="geral-imovel linha largura-total">
+		    	<!-- Insere Imóvel no DB SQL -->
+				 	<!--span tal:replace="python: context.contaImovel(codigo=codigo_imovel)" /-->
+			   <div class="imovel linha">
+					  <div class="titulo-imovel">
+						<img class="img-no-vertical float-left padding-top5" src="imagens/coemi_seta_G.gif"/>
+						<h1 class="margin-left" tal:content="imovel/title">Condomí­nio Monte Carlos Del Rey Especial</h1>
+					  </div>
+				    <div class="geral-dados-imovel linha largura-total">
+						<div class="dados-imovel">
+					       <div class="endereco-imovel">
+								<!--span tal:content="string: ${imovel/city} / ${imovel/district}">Cidade / Bairro</span--><br>
+								<!--<p tal:content="imovel/location">Localização </p>-->
+						   </div>
+						
+						   <div class="imovel-opcoes">
+								<ul id="opcoes-imoveis">									
+									<li class="opcoes"><img alt=" " src="imagens/coemi_seta_P_02.gif"/><a href="indicar">Indicar</a></li>
+									<li class="opcoes"><img alt=" " src="imagens/coemi_seta_P_02.gif"/>
+										<a href="" tal:attributes="href string:template_imovel_impressao/codigo_imovel/${imovel/code}" target="_blank">Imprimir</a>
+									</li>
+									<li class="opcoes"><img alt=" " src="imagens/coemi_seta_P_02.gif"/><a href="javascript:onclick=history.back(-1)">Voltar</a></li>
+								</ul>
+						   </div>
+						</div>
+            		</div>
+				   <div class="dados-endereco linha">
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Descrição</span><br/>
+							<span tal:content="imovel/description_immobile" class="conteudo-endereco">Description immobile</span>
+						  </div>
+
+						<div class="controle-dados-endereco" id="endereco">
+							<span class="titulo-endereco">Localização</span><br/>
+							<!--<span class="conteudo-endereco" tal:content="imovel/location">Logradouro</span><br />--><br />
+						</div>
+
+						<!--div class="controle-dados-endereco">
+							<span class="titulo-endereco">Cidade</span><br/>
+							<span class="conteudo-endereco" tal:content="imovel/city">Cidade</span>
+					    </div-->
+
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Bairro</span><br/>
+							<span class="conteudo-endereco" tal:content="imovel/district">Bairro</span>
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Cep</span><br/>
+							<!--<span tal:content="imovel/cep" class="conteudo-endereco">Cep</span>-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Tipo</span><br/>
+							<span class="conteudo-endereco" tal:content="imovel/type">Tipo</span>
+						</div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Área útil / Privativa</span><br/>
+							<!--<span class="conteudo-endereco" tal:content="imovel/area_private">Área útil / Privativa</span> m&sup2;-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Área Terreno</span><br/>
+							<!--<span class="conteudo-endereco" tal:content="imovel/area_private">Área Terreno</span> m&sup2;-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Valor Venda</span><br/>
+							R$<!--<span tal:content="imovel/value_sale" />-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Valor Aluguel</span><br/>
+							R$<!--<span tal:content="imovel/value_rent" />-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Telefone 1</span><br />
+							<!--<span tal:content="imovel/phone1" />-->
+					    </div>
+					    
+					    <div class="controle-dados-endereco">
+							<span class="titulo-endereco">Telefone 2</span><br />
+							<!--span tal:content="imovel/phone2" /-->
+					    </div>
+					    
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Condomínio</span><br/>
+							R$<!--span tal:content="imovel/condominium"/-->
+					    </div>
+										
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Código</span><br/>
+							<span tal:content="imovel/code" class="conteudo-endereco">Código</span>
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Quartos</span><br/>
+							<!--span tal:content="imovel/room" class="conteudo-endereco">Quartos</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Suítes</span><br/>
+							<!--span tal:content="imovel/suite" class="conteudo-endereco">Suítetes</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Banheiros</span><br/>
+							<!--span tal:content="imovel/toilets" class="conteudo-endereco">Banheiros</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">DCE</span><br/>
+							<!--span tal:content="imovel/dce" class="conteudo-endereco">DCE</span-->
+							
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Garagens</span><br/>
+							<!--span tal:content="imovel/garage" class="conteudo-endereco">Garagens</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Elevador</span><br/>
+							<!--span tal:content="imovel/elevator" class="conteudo-endereco">Elevador</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Piscina</span><br/>
+							<!--span class="conteudo-endereco" tal:content="imovel/pool">Piscina</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Andares</span><br/>
+							<!--span tal:content="imovel/floors" class="conteudo-endereco">Andares</span-->
+					    </div>
+						
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Andar</span><br/>
+							<!--span class="conteudo-endereco" tal:content="imovel/floor">Andar</span-->
+					    </div>
+												
+						<div class="controle-dados-endereco">
+							<span class="titulo-endereco">Posição Sol</span><br/>
+							<!--span tal:content="imovel/position_sun" class="conteudo-endereco">Posição</span-->
+					    </div>
+					</div>
+				  
+				  <!--div class="geral-imagens linha" tal:condition="not:imovel/info | nothing">
+						<div id="images">
+							<tal:repeat tal:repeat="imagen imovel/fotos">
+								<img src="" tal:attributes="src imagen/getUrl;
+								 							alt imagen/Descricao;
+									                     	title imagen/Descricao;">
+							</tal:repeat>
+						</div>
+						<script>
+							// Load the classic theme
+			 				Galleria.loadTheme('/classic/galleria.classic.js');
+							$j('#images').galleria();
+						</script>
+				  </div-->
+
+				  </div>
+	    	</div>
+	</div>	 
+
+    	</tal:define>
+	</tal:main-macro>
+</metal:main>
+</html>
+    		
