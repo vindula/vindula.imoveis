@@ -302,7 +302,8 @@ class Imovel(MongoPersistent):
     def getFotos(self):
         from collections import FotoImovelCollection
         fotos_folder = FotoImovelCollection(self.collection.database)
-        return [i for i in fotos_folder.collection.find({'ImovelId':self.Id})]
+        #Flag AtivoWs retorna apenas os imoveis ativos no WebService
+        return [i for i in fotos_folder.collection.find({'ImovelId':self.Id,'AtivoWs':"1"})]
         
 class Cidade(MongoPersistent):          
     _type = 'Cidade'
