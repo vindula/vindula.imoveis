@@ -46,7 +46,7 @@ class WSIntegrationView(grok.View):
         imoveis_folder = ImovelCollection(self.getMongoConnection())
         fotos_folder = FotoImovelCollection(self.getMongoConnection())
         
-        client = Client(vars['ws_address'],timeout=600)
+        client = Client(vars['ws_address'])
         client.service.logar(vars['ws_user'],vars['ws_password'])
         
         
