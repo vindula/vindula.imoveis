@@ -17,7 +17,13 @@ vindula/imoveis/browser/__init__.py
 vindula/imoveis/browser/imoveis.py
 vindula/imoveis/browser/imoveis_base.py
 vindula/imoveis/browser/interfaces.py
+vindula/imoveis/browser/search.py
 vindula/imoveis/browser/views.py
 vindula/imoveis/content/__init__.py
+vindula/imoveis/content/controlpanel.py
 vindula/imoveis/content/imovel.py
 vindula/imoveis/content/interfaces.py
+vindula/imoveis/models/__init__.py
+vindula/imoveis/models/collections.py
+vindula/imoveis/models/documents.py
+vindula/imoveis/models/interfaces.py

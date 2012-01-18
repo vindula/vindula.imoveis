@@ -8,7 +8,8 @@ class SearchView(grok.View):
     grok.name('search-imoveis')
     
     def get_values_search(self):
-        import pdb;pdb.set_trace()
+        #import pdb;pdb.set_trace()
+        pass
 
 #       vars = {'situacao':ImovelCollection().getImovelbySituacao(),
 #                'cidade':ImovelCollection().getImovelbyCidadeId(),

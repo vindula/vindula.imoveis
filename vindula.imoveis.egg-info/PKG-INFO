@@ -1,7 +1,7 @@
 Metadata-Version: 1.0
 Name: vindula.imoveis
 Version: 1.0
-Summary: Modulo de gerenciamento de imoveis.
+Summary: Vindula: Imoveis
 Home-page: http://svn.plone.org/svn/collective/
 Author: UNKNOWN
 Author-email: UNKNOWN
@@ -10,8 +10,7 @@ Description: Introduction
         ============
         
         
-        
-        This product may contain traces of nuts.
+        Modulo de gerenciamento de imoveis.
         
         Changelog
         =========

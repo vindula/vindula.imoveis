@@ -1,8 +1,11 @@
 # Python Compiled files #
 ######################
 *.pyc
+.project
+.pydevproject
+.settings/org.eclipse.core.resources.prefs
 *~
 
 # OS generated files #
 ######################
-.DS_Store?
+.DS_Store*

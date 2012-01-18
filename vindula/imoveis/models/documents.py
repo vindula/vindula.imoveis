@@ -121,7 +121,7 @@ class Imovel(MongoPersistent):
                   'AreaCasaStr',
                   'areaConstruidoStr',
                   'Areatotalstr',
-                  'Valorcondominiostr',
+                  'ValorCondominioStr',
                   'Valorquitadostr',
                   'Valoragiostr',
                   'ValorStr',
@@ -202,7 +202,7 @@ class Imovel(MongoPersistent):
     AreaCasaStr  = None
     areaConstruidoStr = None
     Areatotalstr = None
-    Valorcondominiostr = None
+    ValorCondominioStr = None
     Valorquitadostr = None
     Valoragiostr = None
     ValorStr = None
@@ -302,8 +302,8 @@ class Imovel(MongoPersistent):
     def getFotos(self):
         from collections import FotoImovelCollection
         fotos_folder = FotoImovelCollection(self.collection.database)
-        #Flag AtivoWs retorna apenas os imoveis ativos no WebService
-        return [i for i in fotos_folder.collection.find({'ImovelId':self.Id,'AtivoWs':"1"})]
+        #return [i for i in fotos_folder.collection.find({'ImovelId':self.Id,'AtivoWs':"1"})]
+        return [i for i in fotos_folder.collection.find({'ImovelId':self.Id})]
         
 class Cidade(MongoPersistent):          
     _type = 'Cidade'

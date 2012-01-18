@@ -1,3 +1,4 @@
 setuptools
 plone.app.dexterity
+vindula.mongodbconnector
 suds
