@@ -106,6 +106,7 @@ class Imovel(MongoPersistent):
                   'dataInclusao',
                   'dataAlteracao',
                   'Responsavel',
+                  'FotosVenda',
                   'Creci',
                   'Telefone1',
                   'Telefone2',
@@ -187,6 +188,7 @@ class Imovel(MongoPersistent):
     dataInclusao = None
     dataAlteracao = None
     Responsavel = None
+    FotosVenda = None
     Creci = None
     Telefone1 = None
     Telefone2 = None
@@ -304,6 +306,11 @@ class Imovel(MongoPersistent):
         fotos_folder = FotoImovelCollection(self.collection.database)
         #return [i for i in fotos_folder.collection.find({'ImovelId':self.Id,'AtivoWs':"1"})]
         return [i for i in fotos_folder.collection.find({'ImovelId':self.Id})]
+    
+    def getFotosVenda(self):
+        from collections import FotoImovelCollection
+        fotos_folder = FotoImovelCollection(self.collection.database)
+        return [i for i in fotos_folder.collection.find({'FotoImovel_Id':self.Id})]
         
 class Cidade(MongoPersistent):          
     _type = 'Cidade'
@@ -321,6 +328,7 @@ class Cidade(MongoPersistent):
     data_criacao_objeto = None
     Nome = None
     GMapZoom = None
+    
     Latitude = None
     Longitude = None
 
@@ -423,8 +431,10 @@ class FotoImovel(MongoPersistent):
     attributes = ['_type',
                   'Id',
                   'FotoImovel_Id',
+                  'FotosVenda',
                   'Fisico',
                   'Path',
+                  'Url',
                   'NomeArquivo',
                   'DataInclusao',
                   'DataAlteracao',
@@ -435,8 +445,10 @@ class FotoImovel(MongoPersistent):
                   ]
     Id = ''
     FotoImovel_Id = None
+    FotosVenda = None
     Fisico = None
     Path = None
+    Url = None
     NomeArquivo = None
     DataInclusao = None
     DataAlteracao = None
@@ -449,7 +461,7 @@ class FotoImovel(MongoPersistent):
         url = 'http://www.wimoveis.com.br/img/foto/%s/%s'
         url = url % (self.Path,self.NomeArquivo)
         return url
-    
+
 class Transform(SONManipulator):
     types = ['Imovel',
              'Cidade',

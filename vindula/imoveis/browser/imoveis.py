@@ -56,18 +56,3 @@ if 1==2:
     #            imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
     #        
     #        """
-    
-    
-#ws_url = 'http://ws.wimoveis.com.br/default.asmx?WSDL'
-#usuario_ws = '181'
-#senha_ws = 'imoveiscoemi123'
-#client = Client(ws_url,timeout=600)
-#logar =  client.service.logar(usuario_ws,senha_ws)
-#listarAluguel = client.service.listarAluguel(True)
-#pegarImovel = client.service.pegarImovel('136519')
-
-# Menoti este método esta para ser resolvido, atualmente não esta funcionando
-#lista_vendas = client.service.listarVendaRede()
-
-#Este é o método utilizado atualmente
-#lista_vendas_2 = client.service.listarVenda()

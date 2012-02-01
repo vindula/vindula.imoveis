@@ -46,7 +46,7 @@ class WSIntegrationView(grok.View):
         imoveis_folder = ImovelCollection(self.getMongoConnection())
         fotos_folder = FotoImovelCollection(self.getMongoConnection())
         
-        client = Client(vars['ws_address'])
+        client = Client(vars['ws_address'],timeout=6000)
         client.service.logar(vars['ws_user'],vars['ws_password'])
         
         
@@ -61,8 +61,17 @@ class WSIntegrationView(grok.View):
         
         if vars['ws_integration'] == True:
             print 'Importing Data form Ws: ', vars['ws_address']
-            lista_vendas = client.service.listarVenda(True)
+            lista_vendas = client.service.listarVendaRede(True)
             for imovel in lista_vendas:
+                id = imovel.IdImovel
+                foto_obj = fotos_folder.get(imovel.IdImovel,params_obj=imovel)
+                foto_obj.FotoImovel_Id = imovel.IdImovel
+                urls = []
+                for url in imovel.Fotos:
+                    urls.append(url.Url)
+                foto_obj.Url = urls
+                foto_obj.save()
+                imovel = client.service.pegarImovel(id)
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
                 imovel_obj.Venda = True
                 imovel_obj.save()
@@ -71,11 +80,12 @@ class WSIntegrationView(grok.View):
         for imovel in imoveis_folder.collection.find():
             print 'Importing Photos Imovel: ', imovel.Id
 	    #O metodo listarFoto recebe o id do imovel e uma nova flag,sendo 1(fotos dos imoveis ativos) 0(fotos dos imoveis inativos)
-            fotos = client.service.listarFoto(imovel.Id,1)
-            for foto in fotos:
-                foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
-                foto_obj.ImovelId = imovel.Id
-                foto_obj.save()
-        
+            if imovel.Aluguel == True:
+                fotos = client.service.listarFoto(imovel.Id,1)
+                for foto in fotos:
+                    foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
+                    foto_obj.ImovelId = imovel.Id
+                    foto_obj.save()
+            
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
         return ''        
