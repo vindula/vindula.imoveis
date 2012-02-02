@@ -113,7 +113,7 @@ class ImovelCollection(BaseCollection):
     def getFotosbyId(self,id_imovel):
         from collections import FotoImovelCollection
         fotos_folder = FotoImovelCollection(self.collection.database)
-        return [i for i in fotos_folder.collection.find({'ImovelId':id_imovel})] 
+        return [i for i in fotos_folder.collection.find({'FotoImovel_Id':id_imovel})] 
        
 class CidadeCollection(BaseCollection):
     """
