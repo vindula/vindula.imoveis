@@ -89,9 +89,11 @@ class ImovelCollection(BaseCollection):
     def getImovelbyTipoImovel(self,tipoimovel_id):
         return self.collection.find({'TipoImovel_Id': tipoimovel_id})
     
-    def getImoveisSearch(self,situacao,cidade_id,bairro_id,tipoimovel_id):
+    def getImoveisSearch(self,situacao,cidade_id,bairro_id,tipoimovel_id,quartos):
         #Situacao 1 == Venda e Situacao 2 == Aluguel
         dict_busca = {}
+        dict_busca_quartos = {}
+        
         if situacao != 0:
             if situacao == 1:
                 dict_busca['Venda'] = True
@@ -106,6 +108,15 @@ class ImovelCollection(BaseCollection):
             
         if tipoimovel_id != 0:
             dict_busca['TipoImovel_Id'] = tipoimovel_id
+        
+        if quartos !=0:
+            dict_busca['Quarto'] = quartos
+
+        if quartos == 4 and quartos!=0:
+            #import pdb;pdb.set_trace()
+            dict_busca_quartos.update({'$gt':quartos})
+            valor = dict_busca_quartos
+            dict_busca.update({'Quarto': valor })
             
         print dict_busca
         return self.collection.find(dict_busca)
