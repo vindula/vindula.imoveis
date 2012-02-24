@@ -63,18 +63,19 @@ class WSIntegrationView(grok.View):
             print 'Importing Data form Ws: ', vars['ws_address']
             lista_vendas = client.service.listarVendaRede(True)
             for imovel in lista_vendas:
-                id = imovel.IdImovel
-                foto_obj = fotos_folder.get(imovel.IdImovel,params_obj=imovel)
-                foto_obj.FotoImovel_Id = imovel.IdImovel
-                urls = []
-                for url in imovel.Fotos:
-                    urls.append(url.Url)
-                foto_obj.Url = urls
-                foto_obj.save()
-                imovel = client.service.pegarImovel(id)
-                imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
-                imovel_obj.Venda = True
-                imovel_obj.save()
+                if imovel.NomeEmpresa != 'EXITO  IMOBILIARIA LTDA':
+                    id = imovel.IdImovel
+                    foto_obj = fotos_folder.get(imovel.IdImovel,params_obj=imovel)
+                    foto_obj.FotoImovel_Id = imovel.IdImovel
+                    urls = []
+                    for url in imovel.Fotos:
+                        urls.append(url.Url)
+                    foto_obj.Url = urls
+                    foto_obj.save()
+                    imovel = client.service.pegarImovel(id)
+                    imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                    imovel_obj.Venda = True
+                    imovel_obj.save()
                 
         
         for imovel in imoveis_folder.collection.find():
@@ -89,3 +90,4 @@ class WSIntegrationView(grok.View):
             
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
         return ''        
+
