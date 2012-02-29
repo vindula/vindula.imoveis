@@ -113,8 +113,7 @@ class ImovelCollection(BaseCollection):
             dict_busca['Quarto'] = quartos
 
         if quartos == 4 and quartos!=0:
-            #import pdb;pdb.set_trace()
-            dict_busca_quartos.update({'$gt':quartos})
+            dict_busca_quartos.update({'$gte':quartos})
             valor = dict_busca_quartos
             dict_busca.update({'Quarto': valor })
             
