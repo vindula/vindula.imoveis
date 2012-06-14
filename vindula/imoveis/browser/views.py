@@ -61,7 +61,12 @@ class WSIntegrationView(grok.View):
         
         if vars['ws_integration'] == True:
             print 'Importing Data form Ws: ', vars['ws_address']
-            lista_vendas = client.service.listarVendaRede(True)
+            try:
+                lista_vendas = client.service.listarVendaRede(True)
+            except:
+                client.service.logar(vars['ws_user'],vars['ws_password'])
+                lista_vendas = client.service.listarVendaRede(True)
+                
             for imovel in lista_vendas:
                 if imovel.NomeEmpresa != 'EXITO  IMOBILIARIA LTDA':
                     id = imovel.IdImovel
@@ -72,8 +77,17 @@ class WSIntegrationView(grok.View):
                         urls.append(url.Url)
                     foto_obj.Url = urls
                     foto_obj.save()
-                    imovel = client.service.pegarImovel(id)
-                    imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                    try:
+                        imovel = client.service.pegarImovel(id)
+                    except:
+                        client.service.logar(vars['ws_user'],vars['ws_password'])
+                        imovel = client.service.pegarImovel(id)
+                    try:
+                        imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                    except:
+                        imovel['Id'] = imovel.IdImovel
+                        imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+                        
                     imovel_obj.Venda = True
                     imovel_obj.save()
                 
