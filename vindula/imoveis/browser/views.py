@@ -52,7 +52,11 @@ class WSIntegrationView(grok.View):
         
         if vars['ws_integration'] == True:
             print 'Importing Data form Ws: ', vars['ws_address']
-            lista_alugueis = client.service.listarAluguel(True)
+            try:
+                lista_alugueis = client.service.listarAluguel(True)
+            except:
+                client.service.logar(vars['ws_user'],vars['ws_password'])
+                lista_alugueis = client.service.listarAluguel(True)
             for imovel in lista_alugueis:
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
                 imovel_obj.Aluguel = True
@@ -96,7 +100,11 @@ class WSIntegrationView(grok.View):
             print 'Importing Photos Imovel: ', imovel.Id
 	    #O metodo listarFoto recebe o id do imovel e uma nova flag,sendo 1(fotos dos imoveis ativos) 0(fotos dos imoveis inativos)
             if imovel.Aluguel == True:
-                fotos = client.service.listarFoto(imovel.Id,1)
+                try:
+                    fotos = client.service.listarFoto(imovel.Id,1)
+                except:
+                    client.service.logar(vars['ws_user'],vars['ws_password'])
+                    fotos = client.service.listarFoto(imovel.Id,1)
                 for foto in fotos:
                     foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
                     foto_obj.ImovelId = imovel.Id
