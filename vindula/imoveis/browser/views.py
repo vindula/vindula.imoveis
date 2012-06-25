@@ -68,8 +68,12 @@ class WSIntegrationView(grok.View):
             try:
                 lista_vendas = client.service.listarVendaRede(True)
             except:
-                client.service.logar(vars['ws_user'],vars['ws_password'])
-                lista_vendas = client.service.listarVendaRede(True)
+                try:
+                    client.service.logar(vars['ws_user'],vars['ws_password'])
+                    lista_vendas = client.service.listarVendaRede(True)
+                except:
+                    print 'Metodo do wimoveis fora do ar, adiando importacao.'
+                    return
                 
             for imovel in lista_vendas:
                 if imovel.NomeEmpresa != 'EXITO  IMOBILIARIA LTDA':
@@ -84,8 +88,12 @@ class WSIntegrationView(grok.View):
                     try:
                         imovel = client.service.pegarImovel(id)
                     except:
-                        client.service.logar(vars['ws_user'],vars['ws_password'])
-                        imovel = client.service.pegarImovel(id)
+                        try:
+                            client.service.logar(vars['ws_user'],vars['ws_password'])
+                            imovel = client.service.pegarImovel(id)
+                        except:
+                            print 'Metodo do wimoveis fora do ar, adiando importacao.'
+                            return
                     try:
                         imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
                     except:
@@ -103,8 +111,12 @@ class WSIntegrationView(grok.View):
                 try:
                     fotos = client.service.listarFoto(imovel.Id,1)
                 except:
-                    client.service.logar(vars['ws_user'],vars['ws_password'])
-                    fotos = client.service.listarFoto(imovel.Id,1)
+                    try:
+                        client.service.logar(vars['ws_user'],vars['ws_password'])
+                        fotos = client.service.listarFoto(imovel.Id,1)
+                    except:
+                        print 'Metodo do wimoveis fora do ar, adiando importacao.'
+                        return
                 for foto in fotos:
                     foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
                     foto_obj.ImovelId = imovel.Id
