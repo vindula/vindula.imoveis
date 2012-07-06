@@ -92,8 +92,8 @@ class WSIntegrationView(grok.View):
                 
             for imovel in lista_vendas:
                 if imovel.NomeEmpresa != 'EXITO  IMOBILIARIA LTDA':
-                    id = imovel.IdImovel
-                    lista_ids_ws.append(imovel.Id)
+                    id = int(imovel.IdImovel)
+                    lista_ids_ws.append(int(imovel.IdImovel))
                     foto_obj = fotos_folder.get(imovel.IdImovel,params_obj=imovel)
                     foto_obj.FotoImovel_Id = imovel.IdImovel
                     urls = []
