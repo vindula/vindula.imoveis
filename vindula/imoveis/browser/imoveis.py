@@ -14,39 +14,39 @@ from pymongo import Connection
 #
 #class ImoveisView(grok.View):
 #    def getImoveis(self):
-if 1==2:
-    connection = Connection('localhost', 27017)
-    db = connection['CoemiDB']
-    db.add_son_manipulator(Transform())
+#if 1==2:
+#    connection = Connection('localhost', 27017)
+#    db = connection['coemi']
+#    db.add_son_manipulator(Transform())
     
     #Instancia a Collection
-    imoveis_folder = ImovelCollection(db)
-    cidades = []
+#    imoveis_folder = ImovelCollection(db)
+#    cidades = []
     
     
-    for imovel in  imoveis_folder.collection.find():
-        cidades.append(imovel.getCidade())
-        ufs.append(imovel.getUf())
+#    for imovel in  imoveis_folder.collection.find():
+#        cidades.append(imovel.getCidade())
+#        ufs.append(imovel.getUf())
         
-    for cidade in cidades:
-        print '%s %s' % (cidade.Nome,
-                         cidade.Id)
+#    for cidade in cidades:
+#        print '%s %s' % (cidade.Nome,
+#                         cidade.Id)
     
-    print imoveis_folder.collection.find({'Cidade_Id':5}).count()
+#    print imoveis_folder.collection.find({'Cidade_Id':5}).count()
+
     
-    
-    #        """
-    #        ws_url = 'http://ws.wimoveis.com.br/default.asmx?WSDL'
-    #        usuario_ws = '11165'
-    #        senha_ws = 'abcd102030'
-    #        client = Client(ws_url)
-    #        logar =  client.service.logar(usuario_ws,senha_ws)
-    #        #listarAluguel = client.service.listarAluguel(True)
-    #        #pegarImovel = client.service.pegarImovel('136519')
-    #        #print pegarImovel
-    #        
-    #        lista_alugueis = client.service.listarAluguel(True)
-    #        lista_vendas = client.service.listarVenda(True)
+
+#ws_url = 'http://ws.wimoveis.com.br/default.asmx?WSDL'
+#usuario_ws = '181'
+#senha_ws = 'imoveiscoemi123'
+#lient = Client(ws_url,timeout=6000)
+#logar =  client.service.logar(usuario_ws,senha_ws)
+#pegarImovel = client.service.pegarImovel('136519')
+#listarAluguel = client.service.listarAluguel(True)
+#print pegarImovel
+       
+#lista_alugueis = client.service.listarAluguel(True)
+#lista_vendas = client.service.listarVenda(True)
     #        
     #        
     #        for imovel in lista_alugueis:

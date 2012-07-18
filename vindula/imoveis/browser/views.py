@@ -11,7 +11,7 @@ from vindula.mongodbconnector.interfaces import IMongoDBConnector
 from vindula.imoveis.content.imovel import IImovel
 from vindula.imoveis.content.interfaces import IImoveisControlPanel
 from vindula.imoveis.models.collections import *
-        
+
 class WSIntegrationView(grok.View):
     grok.context(IPloneSiteRoot)
     grok.name('imoveis-wsimport')
@@ -62,6 +62,7 @@ class WSIntegrationView(grok.View):
                 client.service.logar(vars['ws_user'],vars['ws_password'])
                 lista_alugueis = client.service.listarAluguel(True)
             for imovel in lista_alugueis:
+                #import pdb;pdb.set_trace()
                 lista_ids_ws.append(imovel.Id)
                 imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
                 imovel_obj.Aluguel = True
@@ -148,3 +149,46 @@ class WSIntegrationView(grok.View):
             
         print 'Imoveis na base: ', imoveis_folder.collection.find().count()
         return ''        
+
+
+class WSImovelListView(WSIntegrationView):
+    grok.context(IPloneSiteRoot)
+    grok.name('lista_imoveis')
+
+    def getImovelList(self):
+        vars = self.getSettings()    
+        imoveis_folder = ImovelCollection(self.getMongoConnection())
+        imoveis = imoveis_folder.db.Imovel.find()
+        return imoveis
+
+    def updateImovel(self,id):
+        vars = self.getSettings()
+        client = Client(vars['ws_address'],timeout=6000)
+        client.service.logar(vars['ws_user'],vars['ws_password'])
+        imoveis_folder = ImovelCollection(self.getMongoConnection())
+        imoveis = self.getImovelList()
+        for i in imoveis:
+            if str(id) == str(i.Id):
+                imovel_old = i
+        try:
+            imovel = client.service.pegarImovel(id)    
+        except:
+            return 'Erro ao conectar no WS.'
+        
+        imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
+        imovel_obj.Venda = imovel_old.Venda
+        imovel_obj.Aluguel = imovel_old.Aluguel
+        imovel_obj.save()
+        return {'imovel':imovel,
+                'msg':'Dados do imovel atualizados.',
+                'campos_ws': [i for i in dir(imovel) if i[0] != '_']}
+
+
+        
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+<span tal:define="global id python:context.REQUEST.form.get('imovel',None)"></span>
+
+<tal:lista tal:condition="python:'imovel' not in context.REQUEST.form.keys()">
+<h1>Imoveis</h1>
+<ul>
+    <tal:imoveis repeat="imovel python:view.getImovelList()">
+        <li>
+        <a tal:attributes="href string:./@@lista_imoveis?imovel=${imovel/Id}" tal:content="imovel/Id">ID</a>
+        </li>
+    </tal:imoveis>
+<ul>
+</tal:lista>
+
+<tal:imovel tal:condition="python:'imovel' in context.REQUEST.form.keys()">
+
+    <tal:atualizar condition="python: 'atualizar' in context.REQUEST.form.keys()">
+       <span tal:define="global result python:view.updateImovel(id=id)"/>
+       <strong tal:content="python:result['msg']"/>
+    </tal:atualizar>
+
+
+    <h1 tal:content="string: Imovel ${id}">Imovel</h1>
+        <tal:imoveis repeat="imovel python:view.getImovelList()">
+            <tal:imovel condition="python:str(id) == str(imovel.Id)">
+                <a tal:attributes="href string:./@@lista_imoveis?imovel=${imovel/Id}&atualizar=1">Atualizar</a>
+                <ul>
+                    <tal:campos repeat="campo python:imovel.attributes">
+                        <li>
+                            <span tal:content="python:'%s - %s' % (campo,getattr(imovel,campo))"></span> 
+                        </li>
+                    </tal:campos>
+                </ul>
+            </tal:imovel>
+        </tal:imoveis>
+
+        <tal:dados_ws condition="python: 'atualizar' in context.REQUEST.form.keys()">
+            <h1>Dados retornados pelo WebService WImoveis</h1>
+            <ul>
+                <tal:dados_imovel_ws repeat="campo result/campos_ws">
+                    <li tal:content="python:'%s - %s' % (campo,getattr(result['imovel'],campo))"></li>
+                </tal:dados_imovel_ws>
+            </ul>
+        </tal:dados_ws>
+
+
+</tal:imovel>

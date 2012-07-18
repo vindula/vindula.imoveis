@@ -26,7 +26,7 @@ class BaseCollection(object):
         obj = NoneVar
         query = self.collection.find({self.key:param})
         print 'Pesquisando %s: %s' % (self.collection_name,param)
-        if query.count() > 0:
+        if query.count() > 0 and params_obj==None:
             obj = query[0]
         else:
             command = """
@@ -86,6 +86,10 @@ class ImovelCollection(BaseCollection):
     def getImovelById(self,imovel_id):
         return self.collection.find({'Id':imovel_id})
     
+     
+    def getImovelByRef(self,imovel_id):
+        return self.collection.find({'Referencia':imovel_id})
+    
     def getImovelbyTipoImovel(self,tipoimovel_id):
         return self.collection.find({'TipoImovel_Id': tipoimovel_id})
     
@@ -111,7 +115,7 @@ class ImovelCollection(BaseCollection):
         
         if quartos !=0:
             dict_busca['Quarto'] = quartos
-
+        
         if quartos == 4 and quartos!=0:
             dict_busca_quartos.update({'$gte':quartos})
             valor = dict_busca_quartos
@@ -119,7 +123,7 @@ class ImovelCollection(BaseCollection):
             
         print dict_busca
         return self.collection.find(dict_busca)
-        
+    
     def getFotosbyId(self,id_imovel):
         from collections import FotoImovelCollection
         fotos_folder = FotoImovelCollection(self.collection.database)
