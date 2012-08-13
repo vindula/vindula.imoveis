@@ -57,6 +57,17 @@ class MongoPersistent(object):
         for field in self.attributes:
             encoded[field] = getattr(self,field)
         return encoded
+    
+#    def update(self):
+#        #import pdb;pdb.set_trace()
+#        keys = self.__dict__.keys()
+#        for key in keys:
+#            if key == 'collection' or key == '_id' or key =='params_obj':
+#                pass
+#            else:
+#                self.collection.remove({key:getattr(self,key)})
+#                self.collection.insert({key:self})
+            
         
     def save(self):
         self.collection.remove({self.primary_key:getattr(self,self.primary_key)})
@@ -104,7 +115,7 @@ class Imovel(MongoPersistent):
                   'Vazadows',
                   'Posicao',
                   'dataInclusao',
-                  'dataAlteracao',
+                  'DataAlteracao',
                   'Responsavel',
                   'FotosVenda',
                   'Creci',
@@ -186,7 +197,7 @@ class Imovel(MongoPersistent):
     Vazadows = None
     Posicao = None
     dataInclusao = None
-    dataAlteracao = None
+    DataAlteracao = None
     Responsavel = None
     FotosVenda = None
     Creci = None
