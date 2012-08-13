@@ -90,18 +90,11 @@ class WSIntegrationView(grok.View):
                     print 'Metodo do wimoveis fora do ar, adiando importacao.'
                     print datetime.now().strftime('%d/%m/%Y - %H:%M'), ' - Imóveis não atualizados'
                     return
-                
+
             for imovel in lista_vendas:
                 if imovel.NomeEmpresa != 'EXITO  IMOBILIARIA LTDA':
                     id = int(imovel.IdImovel)
                     lista_ids_ws.append(int(imovel.IdImovel))
-                    foto_obj = fotos_folder.get(imovel.IdImovel,params_obj=imovel)
-                    foto_obj.FotoImovel_Id = imovel.IdImovel
-                    urls = []
-                    for url in imovel.Fotos:
-                        urls.append(url.Url)
-                    foto_obj.Url = urls
-                    foto_obj.save()
                     try:
                         imovel = client.service.pegarImovel(id)
                     except:
@@ -131,7 +124,7 @@ class WSIntegrationView(grok.View):
         for imovel in imoveis_folder.collection.find():
             print 'Importing Photos Imovel: ', imovel.Id
         #O metodo listarFoto recebe o id do imovel e uma nova flag,sendo 1(fotos dos imoveis ativos) 0(fotos dos imoveis inativos)
-            if imovel.Aluguel == True:
+            if imovel:
                 try:
                     fotos = client.service.listarFoto(imovel.Id,1)
                 except:
@@ -166,7 +159,9 @@ class WSImovelListView(WSIntegrationView):
         client = Client(vars['ws_address'],timeout=6000)
         client.service.logar(vars['ws_user'],vars['ws_password'])
         imoveis_folder = ImovelCollection(self.getMongoConnection())
+        fotos_folder = FotoImovelCollection(self.getMongoConnection())
         imoveis = self.getImovelList()
+        
         for i in imoveis:
             if str(id) == str(i.Id):
                 imovel_old = i
@@ -179,9 +174,15 @@ class WSImovelListView(WSIntegrationView):
         imovel_obj.Venda = imovel_old.Venda
         imovel_obj.Aluguel = imovel_old.Aluguel
         imovel_obj.save()
+        fotos = client.service.listarFoto(imovel.Id,1)
+        for foto in fotos:
+            foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
+            foto_obj.ImovelId = imovel.Id
+            foto_obj.save()
         return {'imovel':imovel,
-                'msg':'Dados do imovel atualizados.',
+                'msg':'Dados e Fotos do imóvel atualizados.',
                 'campos_ws': [i for i in dir(imovel) if i[0] != '_']}
+
 
 
         
