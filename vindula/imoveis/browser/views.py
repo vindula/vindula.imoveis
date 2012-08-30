@@ -170,11 +170,16 @@ class WSImovelListView(WSIntegrationView):
         except:
             return 'Erro ao conectar no WS.'
         
+        #import pdb;pdb.set_trace()
         imovel_obj = imoveis_folder.get(imovel.Id,params_obj=imovel)
         imovel_obj.Venda = imovel_old.Venda
         imovel_obj.Aluguel = imovel_old.Aluguel
         imovel_obj.save()
         fotos = client.service.listarFoto(imovel.Id,1)
+        # Removendo as urls antigas das fotos
+        fotos_old = imovel_obj.getFotos()
+        for x in fotos_old:
+            x.remove()
         for foto in fotos:
             foto_obj = fotos_folder.get(foto.Id,params_obj=foto)
             foto_obj.ImovelId = imovel.Id
